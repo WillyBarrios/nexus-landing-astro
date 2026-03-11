@@ -1,0 +1,51 @@
+---
+import Navbar from "./Navbar.astro";
+---
+
+<header class="hero" id="inicio">
+    <div class="halo halo-top"></div>
+    <div class="halo halo-bottom"></div>
+
+    <Navbar />
+
+    <div class="container hero-grid">
+        <section class="hero-copy reveal-up">
+            <p class="kicker">Consultora de software</p>
+            <h1>Conectamos tus ideas con soluciones de software</h1>
+            <p class="lead">
+                Construimos productos digitales robustos para empresas que
+                quieren avanzar con claridad técnica, velocidad y foco en
+                resultados de negocio.
+            </p>
+            <div class="hero-actions">
+                <a href="#contacto" class="btn btn-primary"
+                    >Agenda una asesoría</a
+                >
+                <a href="#servicios" class="btn btn-outline"
+                    >Explorar servicios</a
+                >
+            </div>
+        </section>
+
+        <aside class="hero-panel reveal-up delay-1">
+            <p class="panel-title">Cómo trabajamos en Nexus</p>
+            <ul>
+                <li>
+                    <span>01</span> Aterrizamos la idea y priorizamos valor real.
+                </li>
+                <li><span>02</span> Diseñamos la arquitectura y el roadmap.</li>
+                <li>
+                    <span>03</span> Entregamos, medimos y mejoramos continuamente.
+                </li>
+            </ul>
+        </aside>
+    </div>
+
+    <a
+        class="scroll-cue"
+        href="#servicios"
+        aria-label="Ir a la sección de servicios"
+    >
+        <span></span>
+    </a>
+</header>
