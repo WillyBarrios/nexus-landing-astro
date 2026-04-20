@@ -283,10 +283,17 @@ h2 {
 }
 
 .cards-grid,
-.process-grid,
-.team-grid {
+.process-grid {
   margin-top: 2rem;
   display: grid;
+  gap: 1rem;
+}
+
+.team-grid {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -342,8 +349,8 @@ h2 {
   gap: 0.9rem;
 }
 
-.team-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.team-grid .team-card {
+  width: calc((100% - 2rem) / 3);
 }
 
 .photo-slot {
@@ -442,9 +449,12 @@ h2 {
 
   .hero-grid,
   .cards-grid,
-  .process-grid,
-  .team-grid {
+  .process-grid {
     grid-template-columns: 1fr;
+  }
+
+  .team-grid .team-card {
+    width: 100%;
   }
 
   .hero {
