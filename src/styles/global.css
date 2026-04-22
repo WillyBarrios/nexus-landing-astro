@@ -392,6 +392,9 @@ h2 {
   border-radius: clamp(20px, 3vw, 32px);
   padding: clamp(1.4rem, 3vw, 2rem);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background:
     radial-gradient(circle at 20% 20%, rgba(31, 233, 233, 0.2), transparent 40%),
     radial-gradient(circle at 80% 80%, rgba(47, 23, 181, 0.17), transparent 42%),
@@ -401,6 +404,12 @@ h2 {
 .footer-box p {
   color: var(--muted);
   margin: 0.65rem 0 1rem;
+}
+
+.footer-box p:last-child {
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: 1rem;
 }
 
 .reveal-up {
