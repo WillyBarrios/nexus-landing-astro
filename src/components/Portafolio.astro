@@ -1,0 +1,268 @@
+---
+const projects = [
+  {
+    id: "dashboard",
+    title: "Panel Analítico",
+    tag: "Aplicación Web",
+    image: "/assets/project-dashboard.png",
+    description:
+      "Dashboard de analítica en tiempo real con gráficos interactivos, KPIs dinámicos y gestión de campañas. Construido con React y Node.js para una empresa de marketing digital que necesitaba centralizar sus métricas de rendimiento.",
+    demo: "#",
+  },
+  {
+    id: "ecommerce",
+    title: "Tienda Online",
+    tag: "E-Commerce",
+    image: "/assets/project-ecommerce.png",
+    description:
+      "Plataforma de comercio electrónico completa con catálogo de productos, carrito de compras, pasarela de pagos y panel de administración. Desarrollada con Next.js y Stripe para una marca de muebles y decoración.",
+    demo: "#",
+  },
+  {
+    id: "fintech",
+    title: "App Banca Móvil",
+    tag: "Fintech",
+    image: "/assets/project-fintech.png",
+    description:
+      "Aplicación móvil de banca digital con gestión de cuentas, transferencias, pagos de servicios y seguimiento de gastos. Diseñada con React Native y APIs bancarias seguras para una fintech emergente.",
+    demo: "#",
+  },
+  {
+    id: "realestate",
+    title: "Portal Inmobiliario",
+    tag: "Plataforma Web",
+    image: "/assets/project-realestate.png",
+    description:
+      "Plataforma de listado de propiedades con búsqueda avanzada, filtros por ubicación, integración de mapas y sistema de contacto directo. Construida con Astro y Supabase para una agencia inmobiliaria.",
+    demo: "#",
+  },
+  {
+    id: "healthcare",
+    title: "Sistema Médico",
+    tag: "Salud",
+    image: "/assets/project-healthcare.png",
+    description:
+      "Sistema de gestión de pacientes con calendario de citas, historial clínico, dashboard médico y notificaciones. Desarrollado con Vue.js y PostgreSQL para una clínica privada.",
+    demo: "#",
+  },
+  {
+    id: "restaurant",
+    title: "Delivery & Pedidos",
+    tag: "Restaurantes",
+    image: "/assets/project-restaurant.png",
+    description:
+      "Plataforma de pedidos y delivery con menú interactivo, seguimiento en tiempo real, resumen de orden y gestión de entregas. Creada con Next.js y Socket.io para una cadena de restaurantes.",
+    demo: "#",
+  },
+];
+---
+
+<section id="portafolio" class="section container reveal-up">
+  <div class="section-head">
+    <p class="kicker">Portafolio</p>
+    <h2>Proyectos que hablan por sí mismos</h2>
+    <p class="sub">
+      Una selección de soluciones digitales que hemos construido para nuestros
+      clientes.
+    </p>
+  </div>
+
+  <div class="portfolio-grid">
+    {
+      projects.map((project) => (
+        <article
+          class="portfolio-card"
+          data-project={project.id}
+          role="button"
+          tabindex="0"
+          aria-label={`Ver detalles de ${project.title}`}
+        >
+          <div class="portfolio-card__image">
+            <img
+              src={project.image}
+              alt={`Vista previa de ${project.title}`}
+              loading="lazy"
+            />
+            <span class="portfolio-card__tag">{project.tag}</span>
+            <div class="portfolio-card__overlay">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                <line x1="11" y1="8" x2="11" y2="14" />
+                <line x1="8" y1="11" x2="14" y2="11" />
+              </svg>
+              <span>Ver proyecto</span>
+            </div>
+          </div>
+          <div class="portfolio-card__info">
+            <h3>{project.title}</h3>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="portfolio-modal" id="portfolioModal" aria-hidden="true">
+  <div class="portfolio-modal__backdrop"></div>
+  <div class="portfolio-modal__content" role="dialog" aria-modal="true">
+    <button
+      class="portfolio-modal__close"
+      aria-label="Cerrar modal"
+      id="modalCloseX"
+    >
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <div class="portfolio-modal__image">
+      <img id="modalImage" src="" alt="" />
+    </div>
+
+    <div class="portfolio-modal__body">
+      <span class="portfolio-modal__tag" id="modalTag"></span>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDescription"></p>
+
+      <div class="portfolio-modal__actions">
+        <a id="modalDemo" href="#" class="btn btn-primary" target="_blank"
+          >🚀 Demo</a
+        >
+        <button id="modalClose" class="btn btn-outline">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Project data for the modal
+  const projectsData: Record<
+    string,
+    { title: string; tag: string; image: string; description: string; demo: string }
+  > = {
+    dashboard: {
+      title: "Panel Analítico",
+      tag: "Aplicación Web",
+      image: "/assets/project-dashboard.png",
+      description:
+        "Dashboard de analítica en tiempo real con gráficos interactivos, KPIs dinámicos y gestión de campañas. Construido con React y Node.js para una empresa de marketing digital que necesitaba centralizar sus métricas de rendimiento.",
+      demo: "#",
+    },
+    ecommerce: {
+      title: "Tienda Online",
+      tag: "E-Commerce",
+      image: "/assets/project-ecommerce.png",
+      description:
+        "Plataforma de comercio electrónico completa con catálogo de productos, carrito de compras, pasarela de pagos y panel de administración. Desarrollada con Next.js y Stripe para una marca de muebles y decoración.",
+      demo: "#",
+    },
+    fintech: {
+      title: "App Banca Móvil",
+      tag: "Fintech",
+      image: "/assets/project-fintech.png",
+      description:
+        "Aplicación móvil de banca digital con gestión de cuentas, transferencias, pagos de servicios y seguimiento de gastos. Diseñada con React Native y APIs bancarias seguras para una fintech emergente.",
+      demo: "#",
+    },
+    realestate: {
+      title: "Portal Inmobiliario",
+      tag: "Plataforma Web",
+      image: "/assets/project-realestate.png",
+      description:
+        "Plataforma de listado de propiedades con búsqueda avanzada, filtros por ubicación, integración de mapas y sistema de contacto directo. Construida con Astro y Supabase para una agencia inmobiliaria.",
+      demo: "#",
+    },
+    healthcare: {
+      title: "Sistema Médico",
+      tag: "Salud",
+      image: "/assets/project-healthcare.png",
+      description:
+        "Sistema de gestión de pacientes con calendario de citas, historial clínico, dashboard médico y notificaciones. Desarrollado con Vue.js y PostgreSQL para una clínica privada.",
+      demo: "#",
+    },
+    restaurant: {
+      title: "Delivery & Pedidos",
+      tag: "Restaurantes",
+      image: "/assets/project-restaurant.png",
+      description:
+        "Plataforma de pedidos y delivery con menú interactivo, seguimiento en tiempo real, resumen de orden y gestión de entregas. Creada con Next.js y Socket.io para una cadena de restaurantes.",
+      demo: "#",
+    },
+  };
+
+  const modal = document.getElementById("portfolioModal")!;
+  const modalImage = document.getElementById("modalImage") as HTMLImageElement;
+  const modalTitle = document.getElementById("modalTitle")!;
+  const modalTag = document.getElementById("modalTag")!;
+  const modalDescription = document.getElementById("modalDescription")!;
+  const modalDemo = document.getElementById("modalDemo") as HTMLAnchorElement;
+  const modalCloseBtn = document.getElementById("modalClose")!;
+  const modalCloseX = document.getElementById("modalCloseX")!;
+  const backdrop = modal.querySelector(".portfolio-modal__backdrop")!;
+
+  function openModal(projectId: string) {
+    const project = projectsData[projectId];
+    if (!project) return;
+
+    modalImage.src = project.image;
+    modalImage.alt = `Vista previa de ${project.title}`;
+    modalTitle.textContent = project.title;
+    modalTag.textContent = project.tag;
+    modalDescription.textContent = project.description;
+    modalDemo.href = project.demo;
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  // Card click handlers
+  document.querySelectorAll(".portfolio-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      const projectId = (card as HTMLElement).dataset.project;
+      if (projectId) openModal(projectId);
+    });
+    card.addEventListener("keydown", (e) => {
+      if ((e as KeyboardEvent).key === "Enter" || (e as KeyboardEvent).key === " ") {
+        e.preventDefault();
+        const projectId = (card as HTMLElement).dataset.project;
+        if (projectId) openModal(projectId);
+      }
+    });
+  });
+
+  // Close handlers
+  modalCloseBtn.addEventListener("click", closeModal);
+  modalCloseX.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", closeModal);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+</script>
